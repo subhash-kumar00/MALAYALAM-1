@@ -176,11 +176,11 @@
           </div>
         </div>
 
-        <div id="sheetStatus" class="text-xs text-cyan-400 animate-pulse">സ്കോർ ഗൂഗിൾ ഷീറ്റിലേക്ക് രേഖപ്പെടുത്തുന്നു...</div>
+        <div id="sheetStatus" class="text-xs text-cyan-400 animate-pulse">സ്കോർ സേവ് ചെയ്യുന്നു...</div>
 
         <!-- 8 Mark Cut-off Warning Box -->
         <div id="pdfLockNotice" class="hidden max-w-md mx-auto p-3.5 bg-rose-950/40 border border-rose-800/80 rounded-xl text-xs text-rose-300">
-          ⚠️ <strong>ശ്രദ്ധിക്കുക:</strong> ഔദ്യോഗിക നോട്ടുകൾ PDF ഡൗൺലോഡ് ചെയ്യാൻ കുറഞ്ഞത് <strong>8 മാർക്ക്</strong> നേടിയിരിക്കണം. നിങ്ങളുടെ നിലവിലെ സ്കോർ 8-ൽ താഴെയാണ്.
+          ⚠️️ <strong>ശ്രദ്ധിക്കുക:</strong> ഔദ്യോഗിക നോട്ടുകൾ PDF ഡൗൺലോഡ് ചെയ്യാൻ കുറഞ്ഞത് <strong>8 മാർക്ക്</strong> നേടിയിരിക്കണം. നിങ്ങളുടെ നിലവിലെ സ്കോർ 8-ൽ താഴെയാണ്.
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -229,12 +229,12 @@
       <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-xl w-full p-6 shadow-2xl flex flex-col max-h-[85vh]">
         <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
           <div>
-            <h3 class="text-xl font-bold text-cyan-400">ലൈവ് റാങ്ക് ലിസ്റ്റ് (Google Sheet)</h3>
+            <h3 class="text-xl font-bold text-cyan-400">ലൈവ് റാങ്ക് ലിസ്റ്റ്</h3>
             <p class="text-xs text-slate-400">ആദ്യ ശ്രമത്തിലെ സ്കോർ അടിസ്ഥാനമാക്കി ക്രമീകരിച്ചത്</p>
           </div>
           <button type="button" onclick="closeLeaderboard()" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
         </div>
-        <div id="leaderboardLoading" class="py-10 text-center text-sm text-slate-400">ഗൂഗിൾ ഷീറ്റിൽ നിന്നും റാങ്ക് ലിസ്റ്റ് ശേഖരിക്കുന്നു...</div>
+        <div id="leaderboardLoading" class="py-10 text-center text-sm text-slate-400">റാങ്ക് ലിസ്റ്റ് ശേഖരിക്കുന്നു...</div>
         <div class="flex-1 overflow-y-auto custom-scroll pr-1 hidden" id="leaderboardTableWrapper">
           <table class="w-full text-left text-sm">
             <thead class="text-xs uppercase bg-slate-900/80 text-slate-400 sticky top-0">
@@ -270,10 +270,12 @@
   </main>
 
   <footer class="text-center py-3 text-[11px] text-slate-500 border-t border-slate-800">
-    പദശുദ്ധി, വാക്യശുദ്ധി & ശൈലികൾ (സെറ്റ് 1)[cite: 19] | PSC Model Exam
+    പദശുദ്ധി, വാക്യശുദ്ധി & ശൈലികൾ (സെറ്റ് 1) | PSC Model Exam
   </footer>
 
   <script>
+    // 🚀 FIREBASE REALTIME DATABASE URL
+    const FIREBASE_DB_URL = "https://sk-psc-portal-default-rtdb.asia-southeast1.firebasedatabase.app";
     let GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbztE9bExjlH5a9Y_O8pU9CzVZy5zl-wzycDISurGzxqwuWB71Nxquzpg00Ocf2QR9Zb/exec";
     const QUIZ_SHEET_NAME = "പദശുദ്ധി, വാക്യശുദ്ധി & ശൈലികൾ - സെറ്റ് 1";
     let ORIGINAL_PDF_URL = "https://docs.google.com/document/d/YOUR_GOOGLE_DOC_ID/export?format=pdf";
@@ -284,151 +286,151 @@
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ പദമേത്?",
         options: ["അധഃപതനം", "അധഃപ്പതനം", "അഥപതനം", "അധപതനം"],
         ans: 0,
-        exp: "'അധസ്സ് + പതനം' ചേർന്നുണ്ടാകുന്ന പദത്തിന്റെ ശരിയായ രൂപം 'അധഃപതനം' എന്നാണ്[cite: 19]."
+        exp: "'അധസ്സ് + പതനം' ചേർന്നുണ്ടാകുന്ന പദത്തിന്റെ ശരിയായ രൂപം 'അധഃപതനം' എന്നാണ്."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ പദമേത്?",
         options: ["കവയത്രി", "കവയിത്രി", "കവയിത്രീ", "കവയത്രീ"],
         ans: 1,
-        exp: "'കവി' എന്ന പദത്തിന്റെ സ്ത്രീലിംഗ രൂപം 'കവയിത്രി' എന്നാണ് (കവയത്രി എന്നത് തെറ്റായ പ്രയോഗമാണ്)[cite: 19]."
+        exp: "'കവി' എന്ന പദത്തിന്റെ സ്ത്രീലിംഗ രൂപം 'കവയിത്രി' എന്നാണ് (കവയത്രി എന്നത് തെറ്റായ പ്രയോഗമാണ്)."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ രൂപം ഏതാണ്?",
         options: ["ഐക്യകണ്ഠേന", "ഏകകണ്ഠന", "ഐകകണ്ഠേന", "ഏകകണ്ഠേന"],
         ans: 2,
-        exp: "'ഐകകണ്ഠേന' അല്ലെങ്കിൽ 'ഏകകണ്ഠമായി' എന്നാണ് പ്രയോഗിക്കേണ്ടത്[cite: 19]. 'ഏകകണ്ഠേന' എന്നത് വ്യാകരണപരമായി തെറ്റാണ്[cite: 19]."
+        exp: "'ഐകകണ്ഠേന' അല്ലെങ്കിൽ 'ഏകകണ്ഠമായി' എന്നാണ് പ്രയോഗിക്കേണ്ടത്. 'ഏകകണ്ഠേന' എന്നത് വ്യാകരണപരമായി തെറ്റാണ്."
       },
       {
         q: "താഴെ നൽകിയിരിക്കുന്നവയിൽ അക്ഷരത്തെറ്റില്ലാത്ത പദമേത്?",
         options: ["സിംഖല", "ശ്രൃംഖല", "ശൃംഘല", "ശൃംഖല"],
         ans: 3,
-        exp: "ശരിയായ പദം 'ശൃംഖല' എന്നാണ് (ഖ വർഗ്ഗത്തിലെ അക്ഷരമാണ് ഉപയോഗിക്കേണ്ടത്)[cite: 19]."
+        exp: "ശരിയായ പദം 'ശൃംഖല' എന്നാണ് (ഖ വർഗ്ഗത്തിലെ അക്ഷരമാണ് ഉപയോഗിക്കേണ്ടത്)."
       },
       {
         q: "താഴെ പറയുന്ന പദങ്ങളുടെ ശുദ്ധരൂപങ്ങളെ സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. 'അനന്തരവൻ' എന്ന് എഴുതേണ്ടിടത്ത് 'അനന്തിരവൻ' എന്ന് എഴുതുന്നതാണ് വ്യാകരണപരമായി ശരി .\n2. 'അനുഗൃഹീതൻ' എന്ന പദത്തിൽ 'ഗൃ' ആണ് ഉപയോഗിക്കേണ്ടത്, 'ഗ്ര' അല്ല .\n3. 'ആദ്യവസാനം' എന്നതാണ് ശരിയായ പദം, 'ആദ്യാവസാനം' എന്നത് തെറ്റാണ് .",
         options: ["1, 2, 3 ശരിയാണ്", "1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 3,
-        exp: "ഒന്നാമത്തെ പ്രസ്താവന തെറ്റാണ്[cite: 19]. ശരിയായ പദം 'അനന്തരവൻ' എന്നാണ് ('അനന്തിരവൻ' തെറ്റാണ്)[cite: 19]. 2, 3 ശരിയാണ്[cite: 19]."
+        exp: "ഒന്നാമത്തെ പ്രസ്താവന തെറ്റാണ്. ശരിയായ പദം 'അനന്തരവൻ' എന്നാണ് ('അനന്തിരവൻ' തെറ്റാണ്). 2, 3 ശരിയാണ്."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ തെറ്റായ പദമേത്?",
         options: ["തെരഞ്ഞെടുപ്പ്", "അവധാനം", "അസന്ദിഗ്ദ്ധം", "തിരഞ്ഞെടുപ്പ്"],
         ans: 0,
-        exp: "ശരിയായ പദം 'തിരഞ്ഞെടുപ്പ്' എന്നാണ്[cite: 19]. 'തെരഞ്ഞെടുപ്പ്' എന്നത് വ്യവഹാരത്തിലുണ്ടെങ്കിലും തെറ്റായ പ്രയോഗമാണ്[cite: 19]."
+        exp: "ശരിയായ പദം 'തിരഞ്ഞെടുപ്പ്' എന്നാണ്. 'തെരഞ്ഞെടുപ്പ്' എന്നത് വ്യവഹാരത്തിലുണ്ടെങ്കിലും തെറ്റായ പ്രയോഗമാണ്."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ പദമേത്?",
         options: ["കയക്ഷരം", "കൈയക്ഷരം", "കയ്യക്ഷരം", "കൈയ്യക്ഷരം"],
         ans: 1,
-        exp: "'കൈ + അക്ഷരം' ചേർന്നുണ്ടാകുന്നത് 'കൈയക്ഷരം' എന്നാണ് (കയ്യക്ഷരം എന്നത് തെറ്റാണ്)[cite: 19]."
+        exp: "'കൈ + അക്ഷരം' ചേർന്നുണ്ടാകുന്നത് 'കൈയക്ഷരം' എന്നാണ് (കയ്യക്ഷരം എന്നത് തെറ്റാണ്)."
       },
       {
         q: "'നിഷ്ഫലമായ പ്രയത്നം' എന്ന അർത്ഥം നൽകുന്ന ശൈലി ഏതാണ്?",
         options: ["അങ്കം വെട്ടുക", "അങ്ങാടിപ്പയ്യ്", "അന്തിയാകുമ്പോൾ കുടമുടയ്ക്കുക", "അകംപൊരുൾ കാണുക"],
         ans: 2,
-        exp: "ദിവസം മുഴുവൻ ചുമന്ന കുട സന്ധ്യയാകുമ്പോൾ ഉടച്ചുകളയുന്നതുപോലെ അദ്ധ്വാനം പാഴായിപ്പോകുന്നതിനെയാണ് 'അന്തിയാകുമ്പോൾ കുടമുടയ്ക്കുക' എന്ന് പറയുന്നത്[cite: 19]."
+        exp: "ദിവസം മുഴുവൻ ചുമന്ന കുട സന്ധ്യയാകുമ്പോൾ ഉടച്ചുകളയുന്നതുപോലെ അദ്ധ്വാനം പാഴായിപ്പോകുന്നതിനെയാണ് 'അന്തിയാകുമ്പോൾ കുടമുടയ്ക്കുക' എന്ന് പറയുന്നത്."
       },
       {
         q: "'അകത്ത് കത്തി പുറത്ത് പത്തി' എന്ന ശൈലിയുടെ ശരിയായ അർത്ഥമെന്ത്?",
         options: ["ആത്മാർത്ഥമായ സ്നേഹം", "തുറന്ന ശത്രുത കാട്ടുക", "വലിയ വീരവാദം പറയുക", "ഉള്ളിൽ പക വെച്ചുകൊണ്ടുള്ള സ്നേഹപ്രകടനം"],
         ans: 3,
-        exp: "മനസ്സിൽ കടുത്ത പകയും വിദ്വേഷവും ഒളിപ്പിച്ച് പുറമെ നല്ല സ്നേഹം നടിക്കുന്നതിനെയാണ് 'അകത്ത് കത്തി പുറത്ത് പത്തി' എന്ന് പറയുന്നത്[cite: 19]."
+        exp: "മനസ്സിൽ കടുത്ത പകയും വിദ്വേഷവും ഒളിപ്പിച്ച് പുറമെ നല്ല സ്നേഹം നടിക്കുന്നതിനെയാണ് 'അകത്ത് കത്തി പുറത്ത് പത്തി' എന്ന് പറയുന്നത്."
       },
       {
         q: "താഴെ പറയുന്ന ശൈലികളെയും അവയുടെ അർത്ഥങ്ങളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. 'അകത്തമ്മ ചമയുക' എന്നാൽ അധികാരഗർവ്വ് പ്രകടിപ്പിക്കുക എന്നാണർത്ഥം .\n2. 'അജഗളസ്തനം' എന്നാൽ അത്യധികം ഉപയോഗപ്രദവും അത്യാവശ്യവുമായ വസ്തുവിനെ കുറിക്കുന്നു .\n3. 'അഞ്ചാംപത്തി' എന്ന ശൈലി സ്വന്തം പക്ഷത്തെ ഒറ്റിക്കൊടുക്കുന്ന രാജ്യദ്രോഹിയെ സൂചിപ്പിക്കുന്നു .",
         options: ["2, 3 ശരിയാണ്", "1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "1, 2, 3 ശരിയാണ്"],
         ans: 2,
-        exp: "രണ്ടാമത്തെ പ്രസ്താവന തെറ്റാണ്[cite: 19]. ആടിന്റെ കഴുത്തിലെ മുല പോലെ 'അസ്ഥാനത്തുള്ളതും തീർത്തും ഉപയോഗശൂന്യവുമായ വസ്തു'വിനെയാണ് അജഗളസ്തനം എന്ന് വിളിക്കുന്നത്[cite: 19]. 1, 3 ശരിയാണ്[cite: 19]."
+        exp: "രണ്ടാമത്തെ പ്രസ്താവന തെറ്റാണ്. ആടിന്റെ കഴുത്തിലെ മുല പോലെ 'അസ്ഥാനത്തുള്ളതും തീർത്തും ഉപയോഗശൂന്യവുമായ വസ്തു'വിനെയാണ് അജഗളസ്തനം എന്ന് വിളിക്കുന്നത്. 1, 3 ശരിയാണ്."
       },
       {
         q: "'അർദ്ധചന്ദ്രൻ പ്രയോഗിക്കുക' എന്ന ശൈലിയുടെ അർത്ഥം എന്താണ്?",
         options: ["കഴുത്തിന് പിടിച്ച് പുറത്താക്കുക", "ചന്ദ്രനെ ആരാധിക്കുക", "പകുതി അവകാശം നൽകുക", "രാത്രിയിൽ യാത്ര ചെയ്യുക"],
         ans: 0,
-        exp: "കഴുത്തിൽ കൈവെച്ച് തള്ളി അപമാനിച്ച് പുറത്താക്കുന്നതിനെയാണ് 'അർദ്ധചന്ദ്രൻ പ്രയോഗിക്കുക' എന്ന് വിശേഷിപ്പിക്കുന്നത്[cite: 19]."
+        exp: "കഴുത്തിൽ കൈവെച്ച് തള്ളി അപമാനിച്ച് പുറത്താക്കുന്നതിനെയാണ് 'അർദ്ധചന്ദ്രൻ പ്രയോഗിക്കുക' എന്ന് വിശേഷിപ്പിക്കുന്നത്."
       },
       {
         q: "'ഇല്ലാത്തതും സാങ്കൽപ്പികവുമായ വസ്തു' എന്ന അർത്ഥം നൽകുന്ന ശൈലി ഏത്?",
         options: ["കുതിരക്കച്ചവടം", "കുതിരക്കൊമ്പ്", "കുടക്കല്ല്", "കുന്നിമണി"],
         ans: 1,
-        exp: "കുതിരയ്ക്ക് കൊമ്പില്ലാത്തതുപോലെ ലോകത്ത് ഇല്ലാത്തതും അസംഭവ്യവുമായ കാര്യത്തെ 'കുതിരക്കൊമ്പ്' അഥവാ 'ആകാശകുസുമം' എന്ന് വിളിക്കുന്നു[cite: 19]."
+        exp: "കുതിരയ്ക്ക് കൊമ്പില്ലാത്തതുപോലെ ലോകത്ത് ഇല്ലാത്തതും അസംഭവ്യവുമായ കാര്യത്തെ 'കുതിരക്കൊമ്പ്' അഥവാ 'ആകാശകുസുമം' എന്ന് വിളിക്കുന്നു."
       },
       {
         q: "'താനേന്തുന്നതിന്റെ മഹത്ത്വം മനസ്സിലാക്കാത്തവർ' എന്ന അർത്ഥം വരുന്ന പ്രയോഗമേത്?",
         options: ["അഷ്ടാവക്രൻ", "കാർക്കോടകൻ", "കുങ്കുമം ചുമക്കുന്ന കഴുത", "കായംകുളം വാൾ"],
         ans: 2,
-        exp: "തന്റെ പക്കലുള്ള വിലയേറിയ അറിവിന്റെയോ പദവിയുടെയോ മൂല്യം തിരിച്ചറിയാതെ ജീവിക്കുന്നവരെയാണ് 'കുങ്കുമം ചുമക്കുന്ന കഴുത' എന്ന് ഉപമിക്കുന്നത്[cite: 19]."
+        exp: "തന്റെ പക്കലുള്ള വിലയേറിയ അറിവിന്റെയോ പദവിയുടെയോ മൂല്യം തിരിച്ചറിയാതെ ജീവിക്കുന്നവരെയാണ് 'കുങ്കുമം ചുമക്കുന്ന കഴുത' എന്ന് ഉപമിക്കുന്നത്."
       },
       {
         q: "താഴെ കൊടുത്തിരിക്കുന്നവയിൽ ശരിയായ വാക്യം ഏത്?",
         options: ["മറ്റൊരു ഗത്യന്തരമില്ലാതെ അയാൾ മാപ്പു പറഞ്ഞു.", "വേറെ ഗത്യന്തരമില്ലാതെ അയാൾ മാപ്പു പറഞ്ഞു.", "മറ്റ് ഗത്യന്തരമില്ലാതെ അയാൾ മാപ്പു പറഞ്ഞു.", "വേറെ ഗതിയില്ലാതെ അയാൾ മാപ്പു പറഞ്ഞു."],
         ans: 3,
-        exp: "'ഗത്യന്തരം' എന്നാൽ തന്നെ 'മറ്റൊരു ഗതി' എന്നർത്ഥമുണ്ട്[cite: 19]. അതിനാൽ 'വേറെ ഗത്യന്തരം' എന്നത് അനാവശ്യ ദ്വിരുക്തിയാണ്[cite: 19]. 'ഗത്യന്തരമില്ലാതെ' അല്ലെങ്കിൽ 'വേറെ ഗതിയില്ലാതെ' എന്നാണ് പ്രയോഗിക്കേണ്ടത്[cite: 19]."
+        exp: "'ഗത്യന്തരം' എന്നാൽ തന്നെ 'മറ്റൊരു ഗതി' എന്നർത്ഥമുണ്ട്. അതിനാൽ 'വേറെ ഗത്യന്തരം' എന്നത് അനാവശ്യ ദ്വിരുക്തിയാണ്. 'ഗത്യന്തരമില്ലാതെ' അല്ലെങ്കിൽ 'വേറെ ഗതിയില്ലാതെ' എന്നാണ് പ്രയോഗിക്കേണ്ടത്."
       },
       {
         q: "വാക്യശുദ്ധിയുമായി ബന്ധപ്പെട്ട താഴെ പറയുന്ന പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. 'അവർ തമ്മിൽ അജഗജാന്തരമുണ്ട്' എന്നതാണ് ശരിയായ വാക്യം, 'അജഗജാന്തര വ്യത്യാസം' എന്ന് പ്രയോഗിക്കരുത് .\n2. 'എല്ലാ വെള്ളിയാഴ്ച തോറും പ്രാർത്ഥനയുണ്ട്' എന്നത് തികച്ചും ശുദ്ധമായ വാക്യമാണ് .\n3. 'പഞ്ചായത്ത് തോറും ഓരോ ആശുപത്രി ആവശ്യമാണ്' എന്ന് ഇരട്ടയായി പ്രയോഗിക്കുന്നതാണ് ഉചിതം .",
         options: ["1 ഉം 3 ഉം ശരിയാണ്", "1 മാത്രം ശരിയാണ്", "3 മാത്രം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 1,
-        exp: "2, 3 പ്രസ്താവനകൾ തെറ്റാണ്[cite: 19]. 'എല്ലാ വെള്ളിയാഴ്ചയും' അല്ലെങ്കിൽ 'വെള്ളിയാഴ്ച തോറും' എന്നാണ് വേണ്ടത്; 'പഞ്ചായത്ത് തോറും ആശുപത്രി ആവശ്യമാണ്' എന്നാണ് വേണ്ടത്[cite: 19]. അതിനാൽ 1 മാത്രം ശരി[cite: 19]."
+        exp: "2, 3 പ്രസ്താവനകൾ തെറ്റാണ്. 'എല്ലാ വെള്ളിയാഴ്ചയും' അല്ലെങ്കിൽ 'വെള്ളിയാഴ്ച തോറും' എന്നാണ് വേണ്ടത്; 'പഞ്ചായത്ത് തോറും ആശുപത്രി ആവശ്യമാണ്' എന്നാണ് വേണ്ടത്. അതിനാൽ 1 മാത്രം ശരി."
       },
       {
         q: "'അമേരിക്കൻ പ്രസിഡന്റ് സ്വന്തം പത്നിയോടൊപ്പം ഇന്ത്യയിലെത്തി.' - ഈ വാക്യത്തിൽ ഒഴിവാക്കേണ്ട പദം ഏത്?",
         options: ["സ്വന്തം", "പത്നി", "ഒപ്പം", "പ്രസിഡന്റ്"],
         ans: 0,
-        exp: "'പത്നി' എന്നത് തന്നെ ഒരാളുടെ ഭാര്യയായതിനാൽ 'സ്വന്തം' എന്ന വിശേഷണം ഇവിടെ അനാവശ്യ പദബാഹുല്യമാണ്[cite: 19]."
+        exp: "'പത്നി' എന്നത് തന്നെ ഒരാളുടെ ഭാര്യയായതിനാൽ 'സ്വന്തം' എന്ന വിശേഷണം ഇവിടെ അനാവശ്യ പദബാഹുല്യമാണ്."
       },
       {
         q: "താഴെ കൊടുത്തിരിക്കുന്നവയിൽ ശരിയായ വാക്യം ഏത്?",
         options: ["പെട്ടെന്നുണ്ടായ മരണം ഭാര്യയുടെ അയാളെ തളർത്തി.", "ഭാര്യയുടെ പെട്ടെന്നുണ്ടായ മരണം അയാളെ തളർത്തി.", "പെട്ടെന്നുണ്ടായ ഭാര്യയുടെ മരണം അയാളെ തളർത്തി.", "ഭാര്യയുടെ മരണം പെട്ടെന്നുണ്ടായ അയാളെ തളർത്തി."],
         ans: 1,
-        exp: "വിശേഷണം നാമപദത്തിന് മുന്നിൽ കൃത്യമായി വരണം[cite: 19]. 'പെട്ടെന്നുണ്ടായ ഭാര്യ' എന്നത് അർത്ഥവൈകല്യം ഉണ്ടാക്കുന്നു[cite: 19]."
+        exp: "വിശേഷണം നാമപദത്തിന് മുന്നിൽ കൃത്യമായി വരണം. 'പെട്ടെന്നുണ്ടായ ഭാര്യ' എന്നത് അർത്ഥവൈകല്യം ഉണ്ടാക്കുന്നു."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ വാക്യമേത്?",
         options: ["ഓരോരുത്തർക്കും പ്രത്യേകിച്ച് ഓരോ പുസ്തകം കൊടുക്കണം.", "ഓരോരുത്തർക്കും പ്രത്യേകമായി ഓരോ പുസ്തകം കൊടുക്കണം.", "ഓരോരുത്തർക്കും ഓരോ പുസ്തകം കൊടുക്കണം.", "ഓരോരുത്തർക്കും പ്രത്യേകമായി പുസ്തകങ്ങൾ കൊടുക്കണം."],
         ans: 2,
-        exp: "'ഓരോരുത്തർക്കും ഓരോന്ന്' എന്ന് പറയുമ്പോൾ തന്നെ വിതരണം വ്യക്തമാണ്[cite: 19]. 'പ്രത്യേകമായി' എന്നത് അനാവശ്യ പദമാണ്[cite: 19]."
+        exp: "'ഓരോരുത്തർക്കും ഓരോന്ന്' എന്ന് പറയുമ്പോൾ തന്നെ വിതരണം വ്യക്തമാണ്. 'പ്രത്യേകമായി' എന്നത് അനാവശ്യ പദമാണ്."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ ശരിയായ വാക്യം ഏത്?",
         options: ["നമ്മുടെ നാട്ടിൽ സർവ്വത്ര എല്ലായിടത്തും അഴിമതിയാണ്.", "നമ്മുടെ നാട്ടിൽ എല്ലായിടത്തും സർവ്വത്ര അഴിമതിയാണ്.", "നമ്മുടെ നാട്ടിൽ എല്ലാടവും സർവ്വത്ര അഴിമതിയാണ്.", "നമ്മുടെ നാട്ടിൽ എല്ലായിടത്തും അഴിമതിയാണ്."],
         ans: 3,
-        exp: "'എല്ലായിടത്തും', 'സർവ്വത്ര' എന്നിവ ഒരേ അർത്ഥമുള്ള പദങ്ങളാണ്[cite: 19]. രണ്ടും ഒരുമിച്ച് ഒരേ വാക്യത്തിൽ വരുന്നത് തെറ്റാണ്[cite: 19]."
+        exp: "'എല്ലായിടത്തും', 'സർവ്വത്ര' എന്നിവ ഒരേ അർത്ഥമുള്ള പദങ്ങളാണ്. രണ്ടും ഒരുമിച്ച് ഒരേ വാക്യത്തിൽ വരുന്നത് തെറ്റാണ്."
       },
       {
         q: "താഴെ നൽകിയിരിക്കുന്ന പദശുദ്ധി പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. 'അടിമത്തം' എന്ന് എഴുതുന്നത് തെറ്റാണ്, 'അടിമത്വം' എന്നാണ് ശുദ്ധമായ രൂപം .\n2. 'ആധുനികീകരിക്കുക' എന്നതാണ് ശരി, 'ആധുനീകരിക്കുക' എന്നത് തെറ്റാണ് .\n3. 'കുടിശ്ശിക' എന്നതാണ് ശരിയായ രൂപം, 'കുടിശിഖ' എന്നത് തെറ്റാണ് .",
         options: ["1 മാത്രം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "2 മാത്രം തെറ്റാണ്"],
         ans: 0,
-        exp: "ഒന്നാമത്തെ പ്രസ്താവന തെറ്റാണ്[cite: 19]. തദ്ധിതരൂപത്തിൽ 'ത്വം' അല്ല, 'ത്തം' ചേർത്ത് 'അടിമത്തം' എന്നാണ് എഴുതേണ്ടത് (അടിമത്വം തെറ്റാണ്)[cite: 19]. 2, 3 ശരിയാണ്[cite: 19]."
+        exp: "ഒന്നാമത്തെ പ്രസ്താവന തെറ്റാണ്. തദ്ധിതരൂപത്തിൽ 'ത്വം' അല്ല, 'ത്തം' ചേർത്ത് 'അടിമത്തം' എന്നാണ് എഴുതേണ്ടത് (അടിമത്വം തെറ്റാണ്). 2, 3 ശരിയാണ്."
       },
       {
         q: "താഴെ കൊടുത്തിരിക്കുന്നവയിൽ ശരിയായ പ്രയോഗമേത്?",
         options: ["പ്രവൃത്തിപരിചയം", "പ്രവൃത്തന പരിചയം", "പ്രവർത്തന പരിചയം", "പ്രവർത്തിപരിചയം"],
         ans: 0,
-        exp: "തൊഴിൽ അഥവാ കർമ്മം എന്ന അർത്ഥത്തിൽ നാമമായി ഉപയോഗിക്കുമ്പോൾ 'പ്രവൃത്തി' എന്നാണ് ശരി[cite: 19]. 'പ്രവർത്തിക്കുക' എന്നത് ക്രിയാരൂപമാണ്[cite: 19]."
+        exp: "തൊഴിൽ അഥവാ കർമ്മം എന്ന അർത്ഥത്തിൽ നാമമായി ഉപയോഗിക്കുമ്പോൾ 'പ്രവൃത്തി' എന്നാണ് ശരി. 'പ്രവർത്തിക്കുക' എന്നത് ക്രിയാരൂപമാണ്."
       },
       {
         q: "താഴെ കൊടുത്തിരിക്കുന്നവയിൽ ശരിയായ പദമേത്?",
         options: ["അസന്ദിഗ്ധം", "അസന്ദിഗ്ദ്ധം", "അസന്നിഗ്ദ്ധം", "അസന്നിഗ്ദം"],
         ans: 1,
-        exp: "സംശയമില്ലാത്തത് എന്ന അർത്ഥത്തിൽ 'അസന്ദിഗ്ദ്ധം' എന്നാണ് ശുദ്ധമായ രൂപം[cite: 19]."
+        exp: "സംശയമില്ലാത്തത് എന്ന അർത്ഥത്തിൽ 'അസന്ദിഗ്ദ്ധം' എന്നാണ് ശുദ്ധമായ രൂപം."
       },
       {
         q: "താഴെ പറയുന്നവയിൽ തെറ്റായ പദമേത്?",
         options: ["ചെലവ്", "ദൈന്യം", "ചിലവ്", "ചുവര്"],
         ans: 2,
-        exp: "ശരിയായ പദം 'ചെലവ്' എന്നാണ്[cite: 19]. 'ചിലവ്' എന്നത് തെറ്റായ രൂപമാണ്[cite: 19]."
+        exp: "ശരിയായ പദം 'ചെലവ്' എന്നാണ്. 'ചിലവ്' എന്നത് തെറ്റായ രൂപമാണ്."
       },
       {
         q: "താഴെ പറയുന്ന ശൈലികളുടെ അർത്ഥകൽപ്പനകളിൽ തെറ്റായവ ഏവ?\n1. 'ആകാശക്കോട്ട' എന്നാൽ മനസ്സിന്റെ വെറും മനോരാജ്യത്തെ കുറിക്കുന്നു .\n2. 'ആനമുട്ട' എന്നത് പ്രകൃതിയിൽ നേരിട്ട് കാണാൻ കഴിയുന്ന യഥാർത്ഥ വസ്തുവാണ് .\n3. 'ഇഞ്ചി കടിക്കുക' എന്നാൽ അത്യധികം സന്തോഷം പ്രകടിപ്പിക്കുക എന്നാണർത്ഥം .",
         options: ["1, 3 തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1 മാത്രം തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
         ans: 3,
-        exp: "2 (ആനമുട്ട എന്നാൽ തികച്ചും സാങ്കൽപ്പികവും ഇല്ലാത്തതുമായ വസ്തുവാണ്), 3 (ഇഞ്ചി കടിക്കുക എന്നാൽ കടുത്ത ദേഷ്യവും കോപവും പ്രകടിപ്പിക്കുക എന്നാണ്) എന്നീ പ്രസ്താവനകൾ തെറ്റാണ്[cite: 19]. 1 ശരിയാണ്[cite: 19]."
+        exp: "2 (ആനമുട്ട എന്നാൽ തികച്ചും സാങ്കൽപ്പികവും ഇല്ലാത്തതുമായ വസ്തുവാണ്), 3 (ഇഞ്ചി കടിക്കുക എന്നാൽ കടുത്ത ദേഷ്യവും കോപവും പ്രകടിപ്പിക്കുക എന്നാണ്) എന്നീ പ്രസ്താവനകൾ തെറ്റാണ്. 1 ശരിയാണ്."
       },
       {
         q: "'അളവിൽ കവിഞ്ഞ വാശിയും ദുർവാശിയും' കാണിക്കുന്ന സ്വഭാവത്തെ കുറിക്കുന്ന ശൈലി ഏതാണ്?",
         options: ["പൂച്ചക്കണ്ണൻ", "മർക്കടമുഷ്ടി", "ആനച്ചന്തം", "കുരങ്ങുകളി"],
         ans: 1,
-        exp: "വിട്ടുവീഴ്ചയില്ലാത്തതും ന്യായരഹിതവുമായ ശാഠ്യത്തെയാണ് 'മർക്കടമുഷ്ടി' എന്ന് പറയുന്നത്[cite: 19]."
+        exp: "വിട്ടുവീഴ്ചയില്ലാത്തതും ന്യായരഹിതവുമായ ശാഠ്യത്തെയാണ് 'മർക്കടമുഷ്ടി' എന്ന് പറയുന്നത്."
       }
     ];
 
@@ -451,6 +453,11 @@
     const motivationScreen = document.getElementById('motivationScreen');
     const quizScreen = document.getElementById('quizScreen');
     const resultScreen = document.getElementById('resultScreen');
+
+    function cleanTitleForMatch(str) {
+      if (!str) return "";
+      return String(str).replace(/[\s\-_,.:;()\/\\|\[\]]+/g, '').toLowerCase();
+    }
 
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -495,12 +502,11 @@
         motElem.innerText = `ഹലോ, ${currentUser.name}! ✨`;
       }
 
+      // 🌟 റിവ്യൂ മോഡ് (ഹോം പേജിൽ നിന്ന് 'Result' ക്ലിക്ക് ചെയ്താൽ ഉത്തരസൂചിക തുറക്കുന്നു)
       const currentFullUrl = window.location.href.toLowerCase();
-      const isReviewMode = currentFullUrl.includes("view=solution") || 
-                           currentFullUrl.includes("solution") || 
-                           currentFullUrl.includes("result") || 
-                           currentFullUrl.includes("review") ||
-                           urlParams.get('view') === 'solution';
+      const isReviewMode = currentFullUrl.includes("review=true") || 
+                           currentFullUrl.includes("viewresult=true") || 
+                           currentFullUrl.includes("view=solution");
 
       if (isReviewMode) {
         if (motivationScreen) {
@@ -519,54 +525,56 @@
           resultScreen.style.setProperty('display', 'block', 'important');
         }
 
-        let prevScore = urlParams.get('score');
-        let prevCorrect = urlParams.get('correct');
-        let prevWrong = urlParams.get('wrong');
-        let prevSkipped = urlParams.get('skipped');
-
-        if ((!prevScore || prevScore === "0.00" || prevScore === "0") && currentUser.phone) {
-          try {
-            const histKey = `sk_history_${currentUser.phone}`;
-            const history = JSON.parse(localStorage.getItem(histKey) || '[]');
-            const matched = history.slice().reverse().find(h => 
-              h.title === examTitle || 
-              h.title === QUIZ_SHEET_NAME ||
-              (h.title && (h.title.includes("പദശുദ്ധി") || h.title.includes("വാക്യശുദ്ധി")))
-            );
-            if (matched) {
-              prevScore = matched.score;
-              prevCorrect = matched.correct;
-              prevWrong = matched.wrong;
-              prevSkipped = matched.skipped;
-            }
-          } catch(e) {}
-        }
-
-        document.getElementById('resultHeaderTitle').innerText = "കഴിഞ്ഞ പരീക്ഷാ ഫലം & ഉത്തര സൂചിക";
-        document.getElementById('finalScore').innerText = prevScore !== null ? Number(prevScore).toFixed(2) : "0.00";
-        document.getElementById('correctCount').innerText = prevCorrect !== null ? prevCorrect : "0";
-        document.getElementById('wrongCount').innerText = prevWrong !== null ? prevWrong : "0";
-        document.getElementById('skipCount').innerText = prevSkipped !== null ? prevSkipped : "0";
-
-        const statusElem = document.getElementById('sheetStatus');
-        if (statusElem) statusElem.style.display = 'none';
-
-        const subBadge = document.getElementById('resultSubBadge');
-        if (subBadge) subBadge.innerText = "✓ നിങ്ങൾ മുമ്പ് പൂർത്തിയാക്കിയ പരീക്ഷയുടെ ഉത്തരസൂചിക താഴെ നൽകിയിരിക്കുന്നു";
-
-        const badge = document.getElementById('scoreMotivationBadge');
-        if (badge) {
-          badge.className = "max-w-xl mx-auto p-4 rounded-2xl border border-cyan-500/60 bg-cyan-950/40 text-cyan-300";
-          badge.innerHTML = `📖 <strong>മുൻപത്തെ സ്കോർ അവലോകനം</strong> (Previous Attempt Review Mode)`;
-        }
-
-        renderReviewOnlySolutions();
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
+        loadPreviousAttemptFromFirebase();
         return;
       }
     });
+
+    // 🌟 ഫയർബേസിൽ നിന്ന് മുൻപത്തെ അറ്റംപ്റ്റ് എടുത്തു റിസൾട്ട് പേജ് കാട്ടുന്നു
+    async function loadPreviousAttemptFromFirebase() {
+      let prevScore = 0, prevCorrect = 0, prevWrong = 0, prevSkipped = 0;
+
+      if (currentUser.phone && currentUser.phone !== "0000000000") {
+        try {
+          const res = await fetch(`${FIREBASE_DB_URL}/users_history/${currentUser.phone}.json`);
+          const data = await res.json();
+          if (data) {
+            const hList = Object.values(data);
+            const cleanT = cleanTitleForMatch(examTitle);
+            const matched = hList.slice().reverse().find(h => cleanTitleForMatch(h.title) === cleanT);
+            if (matched) {
+              prevScore = Number(matched.score || 0);
+              prevCorrect = matched.correct || 0;
+              prevWrong = matched.wrong || 0;
+              prevSkipped = matched.skipped || 0;
+            }
+          }
+        } catch(e) {}
+      }
+
+      document.getElementById('resultHeaderTitle').innerText = "കഴിഞ്ഞ പരീക്ഷാ ഫലം & ഉത്തര സൂചിക";
+      document.getElementById('finalScore').innerText = prevScore.toFixed(2);
+      document.getElementById('correctCount').innerText = prevCorrect;
+      document.getElementById('wrongCount').innerText = prevWrong;
+      document.getElementById('skipCount').innerText = prevSkipped;
+
+      const statusElem = document.getElementById('sheetStatus');
+      if (statusElem) statusElem.style.display = 'none';
+
+      const subBadge = document.getElementById('resultSubBadge');
+      if (subBadge) subBadge.innerText = "✓ നിങ്ങൾ മുമ്പ് പൂർത്തിയാക്കിയ പരീക്ഷയുടെ ഉത്തരസൂചിക താഴെ നൽകിയിരിക്കുന്നു";
+
+      const badge = document.getElementById('scoreMotivationBadge');
+      if (badge) {
+        badge.className = "max-w-xl mx-auto p-4 rounded-2xl border border-cyan-500/60 bg-cyan-950/40 text-cyan-300";
+        badge.innerHTML = `📖 <strong>മുൻപത്തെ സ്കോർ അവലോകനം</strong> (Previous Attempt Review Mode)`;
+      }
+
+      renderReviewOnlySolutions();
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
 
     document.getElementById('fullscreenToggleBtn').onclick = () => {
       if (!document.fullscreenElement) {
@@ -670,11 +678,35 @@
       handleReportQuestion(currentIndex + 1);
     });
 
-    function handleReportQuestion(qNum) {
+    // 🌟 ചോദ്യങ്ങൾ റിപ്പോർട്ട് ചെയ്യുന്നത് Firebase-ലേക്ക് അയക്കുന്ന ഫംഗ്ഷൻ
+    async function handleReportQuestion(qNum) {
       const reason = prompt(`ചോദ്യം ${qNum} ൽ എന്തെങ്കിലും തെറ്റുകൾ ഉണ്ടെങ്കിൽ ദയവായി താഴെ രേഖപ്പെടുത്തുക:`);
       if (reason && reason.trim()) {
+        const todayDate = new Date().toISOString().split('T')[0];
+        const reportObj = {
+          exam: examTitle,
+          question: `ചോദ്യം ${qNum}`,
+          questionNumber: qNum,
+          reason: reason.trim(),
+          candidate: currentUser.name,
+          phone: currentUser.phone,
+          date: todayDate,
+          timestamp: Date.now()
+        };
+
+        try {
+          // 1. Firebase /reported_questions നോഡിലേക്ക് സേവ് ചെയ്യുന്നു
+          await fetch(`${FIREBASE_DB_URL}/reported_questions.json`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reportObj)
+          });
+        } catch(e) {}
+
+        // 2. ഗൂഗിൾ ഷീറ്റിലേക്കും അയക്കുന്നു
         sendReportQuestionToGoogleSheet(qNum, reason.trim());
-        alert(`നന്ദി! ചോദ്യം ${qNum} ലെ സംശയം വിജയകരമായി റിപ്പോർട്ട് ചെയ്തിരിക്കുന്നു.`);
+
+        alert(`നന്ദി! ചോദ്യം ${qNum} ലെ സംശയം അഡ്മിൻ പാനലിലേക്ക് വിജയകരമായി റിപ്പോർട്ട് ചെയ്തിരിക്കുന്നു.`);
       }
     }
 
@@ -780,25 +812,6 @@
         badge.innerHTML = `💪 <strong>തളരരുത്!</strong> നോട്ട്സുകൾ കൂടുതൽ ആഴത്തിൽ പഠിച്ച് വീണ്ടും പരിശീലിക്കുക.`;
       }
 
-      try {
-        if (currentUser && currentUser.phone && currentUser.phone !== "0000000000") {
-          const historyKey = `sk_history_${currentUser.phone}`;
-          let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-          
-          history = history.filter(h => !(h.title && (h.title === examTitle || h.title === QUIZ_SHEET_NAME)));
-          history.push({
-            title: examTitle,
-            sheetName: QUIZ_SHEET_NAME,
-            score: formattedScore,
-            correct: correct,
-            wrong: wrong,
-            skipped: skipped,
-            date: new Date().toLocaleDateString('ml-IN', { day: 'numeric', month: 'short', year: 'numeric' })
-          });
-          localStorage.setItem(historyKey, JSON.stringify(history));
-        }
-      } catch (err) {}
-
       const downloadBtn = document.getElementById('downloadOriginalNoteBtn');
       const lockNotice = document.getElementById('pdfLockNotice');
 
@@ -820,6 +833,17 @@
       resultScreen.style.setProperty('display', 'block', 'important');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      // 🌟 ഫയർബേസിലേക്ക് മാർക്കുകൾ തത്സമയം കയറ്റുന്നു
+      sendResultToFirebase({
+        name: currentUser.name,
+        phone: currentUser.phone,
+        score: scoreNum,
+        correct: correct,
+        wrong: wrong,
+        skipped: skipped
+      });
+
+      // ഗൂഗിൾ ഷീറ്റിലേക്കും അയക്കുന്നു
       sendResultToGoogleSheet({
         name: currentUser.name,
         phone: currentUser.phone,
@@ -830,6 +854,51 @@
         wrongQuestions: wrongQuestionsList,
         wrongQuestionsArray: wrongQuestionsList
       });
+    }
+
+    // 🌟 പരീക്ഷാ ഫലം നേരിട്ട് ഫയർബേസിലേക്ക് സേവ് ചെയ്യുന്നു
+    async function sendResultToFirebase(payload) {
+      if (!payload.phone || payload.phone === "0000000000") return;
+
+      const cleanExamKey = cleanTitleForMatch(examTitle);
+      const todayDate = new Date().toISOString().split('T')[0];
+
+      try {
+        // 1. ആ പരീക്ഷയുടെ ലൈവ് റാങ്ക് ലിസ്റ്റിലേക്ക് (/ranks)
+        await fetch(`${FIREBASE_DB_URL}/ranks/${cleanExamKey}/${payload.phone}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: payload.name,
+            phone: payload.phone,
+            score: payload.score,
+            date: todayDate
+          })
+        });
+
+        // 2. കുട്ടിയുടെ വ്യക്തിഗത എക്സാം ഹിസ്റ്ററിയിലേക്ക് (/users_history)
+        await fetch(`${FIREBASE_DB_URL}/users_history/${payload.phone}.json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: examTitle,
+            score: payload.score,
+            correct: payload.correct,
+            wrong: payload.wrong,
+            skipped: payload.skipped,
+            date: todayDate,
+            timestamp: Date.now()
+          })
+        });
+
+        const statusDiv = document.getElementById('sheetStatus');
+        if (statusDiv) {
+          statusDiv.innerText = `✓ മാർക്ക് ഫയർബേസിലേക്കും ഷീറ്റിലേക്കും രേഖപ്പെടുത്തി!`;
+          statusDiv.className = "text-xs text-emerald-400 mb-4";
+        }
+      } catch (err) {
+        console.log("Firebase sync error:", err);
+      }
     }
 
     function setupClickableReviewCards() {
@@ -937,8 +1006,6 @@
     function sendResultToGoogleSheet(payload) {
       const statusDiv = document.getElementById('sheetStatus');
       if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        statusDiv.innerText = "Google Sheet ലിങ്ക് നൽകിയിട്ടില്ല (മാർക്ക് മുകളിൽ ലഭ്യമാണ്).";
-        statusDiv.classList.remove('animate-pulse');
         return;
       }
 
@@ -949,14 +1016,6 @@
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      })
-      .then(() => {
-        statusDiv.innerText = `✓ മാർക്ക് '${QUIZ_SHEET_NAME}' എന്ന ഷീറ്റ് ടാബിലേക്ക് രേഖപ്പെടുത്തി!`;
-        statusDiv.className = "text-xs text-cyan-400 mb-4";
-      })
-      .catch(() => {
-        statusDiv.innerText = "ഡാറ്റ സേവ് ചെയ്യുന്നതിൽ ചെറിയ തടസ്സം നേരിട്ടു.";
-        statusDiv.className = "text-xs text-rose-400 mb-4";
       });
     }
 
@@ -1117,7 +1176,8 @@
       });
     });
 
-    function fetchLiveLeaderboard() {
+    // 🌟 ഫയർബേസിൽ നിന്ന് നേരിട്ട് തത്സമയ റാങ്ക് ലിസ്റ്റ് എടുക്കുന്നു
+    async function fetchLiveLeaderboard() {
       const modal = document.getElementById('leaderboardModal');
       const loader = document.getElementById('leaderboardLoading');
       const wrapper = document.getElementById('leaderboardTableWrapper');
@@ -1128,73 +1188,44 @@
       wrapper.classList.add('hidden');
       tbody.innerHTML = '';
 
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        loader.innerText = "Google Apps Script URL സെറ്റ് ചെയ്തിട്ടില്ല.";
-        return;
-      }
+      const cleanKey = cleanTitleForMatch(examTitle);
 
-      fetch(`${GOOGLE_SHEET_WEBAPP_URL}?sheet=${encodeURIComponent(QUIZ_SHEET_NAME)}&_t=${Date.now()}`)
-        .then(res => res.json())
-        .then(data => {
-          loader.classList.add('hidden');
-          wrapper.classList.remove('hidden');
+      try {
+        const res = await fetch(`${FIREBASE_DB_URL}/ranks/${cleanKey}.json`);
+        const data = await res.json();
 
-          const rawList = Array.isArray(data) ? data : (data.leaderboard || []);
+        loader.classList.add('hidden');
+        wrapper.classList.remove('hidden');
 
-          if (!rawList || rawList.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate-500">ഇതുവരെ ആരും പരീക്ഷ പൂർത്തിയാക്കിയിട്ടില്ല.</td></tr>';
-            return;
-          }
+        if (!data) {
+          tbody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate-500">ഇതുവരെ ആരും പരീക്ഷ പൂർത്തിയാക്കിയിട്ടില്ല.</td></tr>';
+          return;
+        }
 
-          const seenPhones = new Set();
-          const uniqueLeaderboard = [];
+        let ranks = Object.values(data);
+        ranks.sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
 
-          rawList.forEach((entry, index) => {
-            let cleanPhone = String(entry.phone || '').replace(/[^0-9]/g, '');
-            if (cleanPhone.length >= 10) {
-              cleanPhone = cleanPhone.slice(-10);
-            }
+        ranks.forEach((entry, idx) => {
+          let phoneStr = String(entry.phone || '').replace(/[^0-9]/g, '');
+          if (phoneStr.length >= 10) phoneStr = phoneStr.slice(-10);
+          
+          const masked = (phoneStr && phoneStr.length >= 5) 
+            ? phoneStr.substring(0, 5) + '*****' 
+            : '---';
 
-            if (cleanPhone && cleanPhone !== "0000000000") {
-              if (!seenPhones.has(cleanPhone)) {
-                seenPhones.add(cleanPhone);
-                entry.originalIndex = index;
-                uniqueLeaderboard.push(entry);
-              }
-            } else {
-              entry.originalIndex = index;
-              uniqueLeaderboard.push(entry);
-            }
-          });
-
-          uniqueLeaderboard.sort((a, b) => {
-            const scoreDiff = parseFloat(b.score) - parseFloat(a.score);
-            if (scoreDiff !== 0) return scoreDiff;
-            return a.originalIndex - b.originalIndex;
-          });
-
-          uniqueLeaderboard.forEach((entry, idx) => {
-            let phoneStr = String(entry.phone || '').replace(/[^0-9]/g, '');
-            if (phoneStr.length >= 10) phoneStr = phoneStr.slice(-10);
-            
-            const masked = (phoneStr && phoneStr.length >= 5) 
-              ? phoneStr.substring(0, 5) + '*****' 
-              : '---';
-
-            const row = document.createElement('tr');
-            row.className = 'hover:bg-slate-700/30 text-slate-300';
-            row.innerHTML = `
-              <td class="py-2.5 px-3 font-mono font-bold">${idx + 1}</td>
-              <td class="py-2.5 px-3 font-medium">${entry.name}</td>
-              <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${masked}</td>
-              <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${Number(entry.score).toFixed(2)}</td>
-            `;
-            tbody.appendChild(row);
-          });
-        })
-        .catch(() => {
-          loader.innerText = "റാങ്ക് ലിസ്റ്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി അല്പം കഴിഞ്ഞ് ശ്രമിക്കുക.";
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-700/30 text-slate-300';
+          row.innerHTML = `
+            <td class="py-2.5 px-3 font-mono font-bold">${idx + 1}</td>
+            <td class="py-2.5 px-3 font-medium">${entry.name || 'വിദ്യാർത്ഥി'}</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${masked}</td>
+            <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${Number(entry.score || 0).toFixed(2)}</td>
+          `;
+          tbody.appendChild(row);
         });
+      } catch (err) {
+        loader.innerText = "റാങ്ക് ലിസ്റ്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി അല്പം കഴിഞ്ഞ് ശ്രമിക്കുക.";
+      }
     }
 
     function closeLeaderboard() {
